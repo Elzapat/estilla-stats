@@ -1,0 +1,83 @@
+:root {
+    font-size: 16px;
+    font-family: "Open Sans";
+    --background-color: #272727;
+    --accent-gray: #747474;
+    --accent-yellow: #FFE400;
+    --accent-orange: #FF652F;
+    --accent-green: #14A76C;
+    --transition-time: 400ms;
+    --border-size: 2px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url("../images/estilla_render_modified.jpg");
+    background-size: cover;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--background-color);
+}
+
+button:last-child {
+    margin-left: auto;
+}
+
+button {
+    border-radius: 0;
+    /* border: 2px solid black; */
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    background-color: var(--accent-green);
+    color: var(--accent-color);
+    transition: all var(--transition-time) ease;
+}
+
+button:hover {
+    background-color: var(--accent-orange);
+}
+
+input, select {
+    border-radius: 2;
+    border: none;
+    width: 15%;
+    height: auto;
+    transition: all var(--transition-time) ease;
+    background-color: white;
+}
+
+/* input { */
+/*     border: var(--border-size) solid var(--background-color); */
+/* } */
+/*  */
+/* input:focus { */
+/*     border: var(--border-size) solid var(--accent-yellow); */
+/* } */
+
+header > * {
+    margin: 1rem 1rem 1rem 1rem;
+    border-radius: var(--border-size);
+    /* padding: 0; */
+    /* padding: 0 5px 0 5px; */
+    /* border: var(--border-size) solid var(--background-color); */
+}
+
+header > *:not(#title) {
+    height: 1.5rem;
+    padding: 0 5px 0 5px;
+}
+
+#title {
+    color: var(--accent-green);
+    padding-left: 10px;
+}
+
+/* #title { */
+/*     height: 2rem; */
+/* } */

@@ -8,10 +8,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href="css/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
+
         <script src="script.js" defer></script>
     </head>
 
     <body>
-        <h1>EstilalStats</h1>
+        <header>
+            <span id="title"><strong>EstillaStats</strong></span>
+            <input id="username" type="text" placeholder="Username"/>
+            <select id="stat-type">
+                <option value="" disabled selected>Choose a stat type</option>
+                <option value="minecraft:killed">Killed</option>
+                <option value="minecraft:mined">Mined</option>
+                <option value="minecraft:broken">Broken</option>
+                <option value="minecraft:dropped">Dropped</option>
+                <option value="minecraft:picked_up">Picked up</option>
+                <option value="minecraft:crafted">Crafted</option>
+                <option value="minecraft:used">Used</option>
+                <option value="minecraft:killed_by">Killed by</option>
+                <option value="minecraft:custom">Custom</option>
+            </select>
+            <input list="stat-names" id="stat-name" type="text" placeholder="Stat value"/>
+            <datalist id="stat-names">
+            </datalist>
+            <button id="get-stat">get stat</button>
+        </header>
+        <main>
+        </main>
     </body>
 </html>
