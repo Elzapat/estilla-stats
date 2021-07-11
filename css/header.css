@@ -1,0 +1,100 @@
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+header > div {
+    display: flex;
+    margin: 1rem 0 1rem 1.5rem;
+}
+
+.input-container {
+    width: 15%;
+}
+
+header > div > * {
+    height: 1.5rem;
+    padding: 0 5px 0 5px;
+    border: none;
+    outline: 2px solid var(--background-color);
+    border-radius: 2px;
+    transition: all var(--transition-time) ease;
+}
+
+header > div:last-child {
+    margin-left: auto;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+button {
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    background-color: var(--accent-green);
+    color: var(--accent-color);
+    transition: all var(--transition-time) ease;
+}
+
+button:hover {
+    background-color: var(--accent-orange);
+}
+
+input, select {
+    width: 100%;
+    background-color: #F5F5F5;
+}
+
+input:focus {
+    outline: var(--border-size) solid var(--accent-orange);
+}
+
+#logo {
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 100%;
+    transform: scale(1.5);
+}
+
+#logo > img {
+    outline: none;
+    transition: transform 400ms ease;
+}
+
+#logo > img:hover {
+    transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 1024px) {
+    .input-container {
+        flex: 1;
+    }
+}
+
+/* Phones */
+@media only screen and (max-width: 480px) {
+    header {
+        flex-direction: column;
+    }
+
+    header > div {
+        margin: 0.5ch 0 1rem 0;
+    }
+
+    #logo {
+        transform: scale(2);
+        margin: 1.5rem;
+    }
+
+    .input-container {
+        width: 80%;
+    }
+
+    button {
+        margin: 0;
+        width: 80%;
+    }
+}
