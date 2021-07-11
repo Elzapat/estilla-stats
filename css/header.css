@@ -1,12 +1,13 @@
-header {
+form {
     width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: var(--background-color);
 }
 
-header > div {
+form > div {
     display: flex;
     margin: 1rem 0 1rem 1.5rem;
 }
@@ -15,7 +16,7 @@ header > div {
     width: 15%;
 }
 
-header > div > * {
+form > div > * {
     height: 1.5rem;
     padding: 0 5px 0 5px;
     border: none;
@@ -24,13 +25,13 @@ header > div > * {
     transition: all var(--transition-time) ease;
 }
 
-header > div:last-child {
+form > div:last-child {
     margin-left: auto;
     padding-right: 1.5rem;
     padding-left: 1.5rem;
 }
 
-button {
+#get-stat {
     text-transform: uppercase;
     font-weight: bold;
     border: none;
@@ -39,7 +40,7 @@ button {
     transition: all var(--transition-time) ease;
 }
 
-button:hover {
+#get-stat:hover {
     background-color: var(--accent-orange);
 }
 
@@ -76,11 +77,11 @@ input:focus {
 
 /* Phones */
 @media only screen and (max-width: 480px) {
-    header {
+    form {
         flex-direction: column;
     }
 
-    header > div {
+    form > div {
         margin: 0.5ch 0 1rem 0;
     }
 
@@ -93,8 +94,20 @@ input:focus {
         width: 80%;
     }
 
-    button {
+    #get-stat {
+        width: 100%;
+    }
+
+    .button-container {
+        width: 40%;
+    }
+
+    form > div:last-child {
+        margin-left: 0;
+    }
+
+    #get-stat {
+        width: 100%;
         margin: 0;
-        width: 80%;
     }
 }

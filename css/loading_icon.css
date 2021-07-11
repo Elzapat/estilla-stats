@@ -1,0 +1,17 @@
+#loading-icon {
+    width: 5%;
+    margin: auto;
+    animation: 300ms ease 0ms fade-in, 1s ease 300ms infinite rotate;
+}
+
+@media only screen and (max-width: 1024px) {
+    #loading-icon {
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #loading-icon {
+        width: 20%;
+    }
+}

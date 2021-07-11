@@ -7,6 +7,7 @@
     width: 85%;
     background-color: var(--background-color);
     border-radius: 2px;
+    transition: transform 500ms ease;
 }
 
 #content > h1 {
@@ -26,7 +27,7 @@
 }
 
 #description > img {
-    width: 15%;
+    width: 150px; 
     margin: 2rem 0rem 2rem 3rem;
 }
 
@@ -55,20 +56,13 @@
         font-size: 90%;
     }
 
+    #content > h1 {
+        margin-right: 1ch;
+        margin-left: 1ch;
+    }
+
     #content > p {
         font-size: 80%;
-        margin: 0 0.3rem 1rem 0.3rem;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    .button-container {
-        width: 40%;
-    }
-
-    header > div:last-child {
-        margin-left: 0;
+        margin: 0 2ch 1rem 2ch;
     }
 }

@@ -9,45 +9,50 @@
 
         <link href="css/constants.css" rel="stylesheet">
         <link href="css/header.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
+        <link href="css/description.css" rel="stylesheet">
+        <link href="css/loading_icon.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
 
-        <script src="script.js" defer></script>
+        <link href="images/estillacraft_logo_transparent_cropped_square.png" rel="icon">
+
+        <script src="js/fetch_stat.js" defer></script>
     </head>
 
     <body>
         <header>
-            <div id="logo">
-                <img src="images/estillacraft_logo_transparent_cropped.png"/>
-                <!-- <span id="title"><strong>EstillaStats</strong></span> -->
-            </div>
-            <div class="input-container">
-                <input id="username" type="text" placeholder="Username"/>
-            </div>
-            <div class="input-container">
-                <select id="stat-type">
-                    <option value="" disabled selected>Choose a stat type</option>
-                    <option value="minecraft:killed">Killed</option>
-                    <option value="minecraft:mined">Mined</option>
-                    <option value="minecraft:broken">Broken</option>
-                    <option value="minecraft:dropped">Dropped</option>
-                    <option value="minecraft:picked_up">Picked up</option>
-                    <option value="minecraft:crafted">Crafted</option>
-                    <option value="minecraft:used">Used</option>
-                    <option value="minecraft:killed_by">Killed by</option>
-                    <option value="minecraft:custom">Custom</option>
-                </select>
-            </div>
-            <div class="input-container">
-                <input list="stat-names" id="stat-name" type="text" placeholder="Stat name"/>
-                <datalist id="stat-names">
-                </datalist>
-            </div>
-            <div class="button-container">
-                <button id="get-stat">get stat</button>
-            </div>
+            <form id="stat-info-form">
+                <div id="logo">
+                    <img src="images/estillacraft_logo_transparent_cropped.png"/>
+                    <!-- <span id="title"><strong>EstillaStats</strong></span> -->
+                </div>
+                <div class="input-container">
+                    <input id="username" value="" type="text" placeholder="Username"/>
+                </div>
+                <div class="input-container">
+                    <select id="stat-type" required>
+                        <option value="" disabled selected>Choose a stat type</option>
+                        <option value="minecraft:killed">Killed</option>
+                        <option value="minecraft:mined">Mined</option>
+                        <option value="minecraft:broken">Broken</option>
+                        <option value="minecraft:dropped">Dropped</option>
+                        <option value="minecraft:picked_up">Picked up</option>
+                        <option value="minecraft:crafted">Crafted</option>
+                        <option value="minecraft:used">Used</option>
+                        <option value="minecraft:killed_by">Killed by</option>
+                        <option value="minecraft:custom">Custom</option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <input list="stat-names" id="stat-name" type="text" placeholder="Stat name" autocomplete="off" required />
+                    <datalist id="stat-names">
+                    </datalist>
+                </div>
+                <div class="button-container">
+                    <button type="submit" id="get-stat">get stat</button>
+                </div>
+            </form>
         </header>
-        <main>
+        <main id="main">
             <section id="description">
                 <img src="images/estillacraft_logo_transparent_cropped.png"/>
                 <div id="content">
@@ -58,7 +63,7 @@
                     </p>
                     <p>
                         Simply choose a stat type from the list, and enter a stat name, you'll be given
-                        options based on the stat type you chose. Optionnally, you can enter a username
+                        options based on the stat type you chose. Optionally, you can enter a username
                         to view the chosen stat for only one player.
                     </p>
                 </div>
