@@ -2844,275 +2844,275 @@
         "type": ["custom"]
     },
     {
-        "id": "mincraft:amethyst_block",
+        "id": "minecraft:amethyst_block",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:amethyst_bud",
+        "id": "minecraft:amethyst_bud",
         "type": ["block"]
     },
     {
-        "id": "mincraft:amethyst_cluster",
+        "id": "minecraft:amethyst_cluster",
         "type": ["block", "item"]
     },
     {
-        "id": "mincraft:amethyst_shard",
+        "id": "minecraft:amethyst_shard",
         "type": ["item"]
     },
     {
-        "id": "mincraft:axolotl_bucket",
+        "id": "minecraft:axolotl_bucket",
         "type": ["item"]
     },
     {
-        "id": "mincraft:axolotl_spawn_egg",
+        "id": "minecraft:axolotl_spawn_egg",
         "type": ["item"]
     },
     {
-        "id": "mincraft:azalea",
+        "id": "minecraft:azalea",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:azalea_leaves",
+        "id": "minecraft:azalea_leaves",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:big_dripleaf",
+        "id": "minecraft:big_dripleaf",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:black_candle",
+        "id": "minecraft:black_candle",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:blue_candle",
+        "id": "minecraft:blue_candle",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:broken_elytra",
+        "id": "minecraft:broken_elytra",
         "type": ["item"]
     },
     {
-        "id": "mincraft:brown_candle",
+        "id": "minecraft:brown_candle",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:budding_amethyst",
+        "id": "minecraft:budding_amethyst",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:bundle",
+        "id": "minecraft:bundle",
         "type": ["item"]
     },
     {
-        "id": "mincraft:bundle_filled",
+        "id": "minecraft:bundle_filled",
         "type": ["item"]
     },
     {
-        "id": "mincraft:calcite",
+        "id": "minecraft:calcite",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:candle",
+        "id": "minecraft:candle",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:chiseled_deepslate",
+        "id": "minecraft:chiseled_deepslate",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cobbled_deepslate",
+        "id": "minecraft:cobbled_deepslate",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cobbled_deepslate_slab",
+        "id": "minecraft:cobbled_deepslate_slab",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cobbled_deepslate_wall",
+        "id": "minecraft:cobbled_deepslate_wall",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cobbled_deepslate_stairs",
+        "id": "minecraft:cobbled_deepslate_stairs",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:copper_block",
+        "id": "minecraft:copper_block",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:copper_ingot",
+        "id": "minecraft:copper_ingot",
         "type": ["item"]
     },
     {
-        "id": "mincraft:copper_ore",
+        "id": "minecraft:copper_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cracked_deepslate_bricks",
+        "id": "minecraft:cracked_deepslate_bricks",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cracked_deepslate_tiles",
+        "id": "minecraft:cracked_deepslate_tiles",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:crossbow_arrow",
+        "id": "minecraft:crossbow_arrow",
         "type": ["item"]
     },
     {
-        "id": "mincraft:crossbow_firework",
+        "id": "minecraft:crossbow_firework",
         "type": ["item"]
     },
     {
-        "id": "mincraft:cut_copper",
+        "id": "minecraft:cut_copper",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cut_copper_slab",
+        "id": "minecraft:cut_copper_slab",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cut_copper_stairs",
+        "id": "minecraft:cut_copper_stairs",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:cyan_candle",
+        "id": "minecraft:cyan_candle",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate",
+        "id": "minecraft:deepslate",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_bricks",
+        "id": "minecraft:deepslate_bricks",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_bricks_slab",
+        "id": "minecraft:deepslate_bricks_slab",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_bricks_stairs",
+        "id": "minecraft:deepslate_bricks_stairs",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_bricks_wall",
+        "id": "minecraft:deepslate_bricks_wall",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_coal_ore",
+        "id": "minecraft:deepslate_coal_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_copper_ore",
+        "id": "minecraft:deepslate_copper_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_diamond_ore",
+        "id": "minecraft:deepslate_diamond_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_emerald_ore",
+        "id": "minecraft:deepslate_emerald_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_gold_ore",
+        "id": "minecraft:deepslate_gold_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_iron_ore",
+        "id": "minecraft:deepslate_iron_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_lapis_ire",
+        "id": "minecraft:deepslate_lapis_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_redstone_ore",
+        "id": "minecraft:deepslate_redstone_ore",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_tiles",
+        "id": "minecraft:deepslate_tiles",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_tile_slab",
+        "id": "minecraft:deepslate_tile_slab",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_tile_slab",
+        "id": "minecraft:deepslate_tile_slab",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_tile_stairs",
+        "id": "minecraft:deepslate_tile_stairs",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:deepslate_tile_wall",
+        "id": "minecraft:deepslate_tile_wall",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:dirt_path",
+        "id": "minecraft:dirt_path",
         "type": ["block"]
     },
     {
-        "id": "mincraft:dripstone_block",
+        "id": "minecraft:dripstone_block",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:exposed_copper",
+        "id": "minecraft:exposed_copper",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:exposed_cut_copper",
+        "id": "minecraft:exposed_cut_copper",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:exposed_cut_copper_slab",
+        "id": "minecraft:exposed_cut_copper_slab",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:explosed_cut_copper_stairs",
+        "id": "minecraft:explosed_cut_copper_stairs",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:flowering_azalea",
+        "id": "minecraft:flowering_azalea",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:flowering_azalea_leaves",
+        "id": "minecraft:flowering_azalea_leaves",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:glow_berries",
+        "id": "minecraft:glow_berries",
         "type": ["item"]
     },
     {
-        "id": "mincraft:glow_ink_sac",
+        "id": "minecraft:glow_ink_sac",
         "type": ["item"]
     },
     {
-        "id": "mincraft:glow_item_frame",
+        "id": "minecraft:glow_item_frame",
         "type": ["block"]
     },
     {
-        "id": "mincraft:glow_lichen",
+        "id": "minecraft:glow_lichen",
         "type": ["block", "item"]
     },
     {
-        "id": "mincraft:glow_squid_spawn_egg",
+        "id": "minecraft:glow_squid_spawn_egg",
         "type": ["item"]
     },
     {
-        "id": "mincraft:goat_spawn_egg",
+        "id": "minecraft:goat_spawn_egg",
         "type": ["item"]
     },
     {
-        "id": "mincraft:gray_candle",
+        "id": "minecraft:gray_candle",
         "type": ["item", "block"]
     },
     {
-        "id": "mincraft:green_candle",
+        "id": "minecraft:green_candle",
         "type": ["item", "block"]
     },
     {

@@ -1,20 +1,72 @@
-const error =  {
-    WRONG_USERNAME: 1,
-    NETWORK_ERROR: 2
-};
-// Variable to keep track if wether or not the user has fetched a stat
-var has_fetched_stat = false;
+// Load all the minecraft ids
+let minecraft_ids = new Object;
+fetch("minecraft_ids.json")
+    .then(response => response.json())
+    .then(ids => {
+        minecraft_ids = ids;
+        add_stat_name_suggestions();
+    });
 
 document.getElementById("stat-info-form").onsubmit = () => {
     get_stat();
     return false;
 };
 
+document.getElementById("stat-type").onchange = add_stat_name_suggestions;
+
+document.getElementById("stat-name").oninput = event => {
+    let datalist = event.target.list;
+
+    for (let option of datalist.options) {
+        if (event.target.value == option.value) {
+            event.target.setCustomValidity("");
+            return;
+        }
+    }
+
+    event.target.setCustomValidity("Please select a value from the list");
+}
+
+function add_stat_name_suggestions() {
+    let stat_type_input = document.getElementById("stat-type");
+    let datalist = document.getElementById("stat-names");
+    let type = new String();
+
+    switch (stat_type_input.value) {
+        case "minecraft:killed": case "minecraft:killed_by":
+            type = "mob";
+            break;
+        case "minecraft:mined":
+            type = "block";
+            break;
+        case "minecraft:broken": case "minecraft:dropped": case "minecraft:picked_up":
+        case "minecraft:used": case "minecraft:crafted":
+            type = "item";
+            break;
+        case "custom":
+            type = "custom";
+            break;
+        default:
+            return;
+    }
+
+    datalist.innerHTML = "";
+
+    for (let thing of minecraft_ids) {
+        if (thing.type.includes(type)) {
+            let option = document.createElement("option");
+            option.text = mc_id_to_human(thing.id);
+            option.value = thing.id;
+            datalist.appendChild(option);
+        }
+    }
+}
+
 async function get_stat() {
-    console.log("test0");
     initiate_loading();
 
-    console.log("test1");
+    has_fetched_stat = true;
+
     let username_input = document.getElementById("username");
     let stat_type_input = document.getElementById("stat-type");
     let stat_name_input = document.getElementById("stat-name");
@@ -30,62 +82,58 @@ async function get_stat() {
     stat_name = stat_name_input.value;
 
     if (!fetch_all) {
-        let player = await get_player_info(username);
+        let player = await get_player_info(username)
+            .catch(e => display_error(e));
+
         uuid = player.id;
         username = player.name;
     }
-    console.log("test2");
 
-    fetch("https://api.estillacraft.net/stats?uuid=5a985b6eae1d4f6e952e0e8134551b8b&stat_type=minecraft:killed&stat_value=minecraft:creeper")
-        .then(response => console.log(response));
+    let stat = await fetch_stat(uuid, stat_type, stat_name)
+        .catch(e => display_error(e));
+
+    console.log(stat);
 };
 
-function error_message(error_type) {
-    switch (error_type) {
-        case error.WRONG_USERNAME:
-            return "The username you entered doesn't exist";        
-        case error.NETWORK_ERROR:
-            return "There was an error fetching data";
-    }
+function mc_id_to_human(source) {
+    source = source
+        .replace(/minecraft:/g, "")
+        .replace(/_/g, " ")
+
+    let words = source.split(" ");
+    for (let i = 0; i < words.length; i++)
+        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+
+    return words.join(" ");
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function human_to_mc_id(source) {
+
 }
 
-function initiate_loading() {
-    if (!has_fetched_stat) {
-        let desc_container = document.getElementById("description");
-        desc_container.style.transform = "translateX(-100vw)";
-    } else {
-
-    }
-
-    const LOADING_HTML = "<img id='loading-icon' src='images/estillacraft_logo_transparent_cropped.png' />";
-    setTimeout(() => {
-        document.getElementById("main").innerHTML = LOADING_HTML;
-    }, 500);
-}
-
-async function stop_loading() {
-    let loading_icon = document.getElementById("loading-icon");
-    loading_icon.style.opacity = 0;
-    await sleep(300);
-}
 
 async function get_player_info(username) {
     let request = `https://api.mojang.com/users/profiles/minecraft/${username}`;
     return await fetch(request)
         .then(response => {
+            console.log(response);
             if (response.status == 204)
                 throw new Error(error.WRONG_USERNAME);
             else if (!response.ok)
-                throw new Error(error.NETWORK_ERROR);
+                throw new Error(error.REQUEST_ERROR);
 
             return response.json();
         });
 }
-//
-// async function get_stat(uuid, stat_type, stat_name) {
-//     
-// }
+
+async function fetch_stat(uuid, stat_type, stat_name) {
+    let request = `https://api.estillacraft.net/stats?uuid=${uuid}&stat_type=${stat_type}&stat_name=${stat_name}`;
+
+    return fetch(request)
+        .then(response => {
+            if (!response.ok)
+                throw new Error(error.REQUEST_ERROR);
+
+            return response.json();
+        });
+}

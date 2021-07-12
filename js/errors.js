@@ -1,0 +1,28 @@
+const error =  {
+    WRONG_USERNAME: 1,
+    REQUEST_ERROR: 2
+};
+
+document.getElementById("error-close").onclick = event => {
+    console.log(event.target.parent);
+    event.target.parentNode.style.display = "none";
+}
+
+function error_message(error_type) {
+    switch (error_type) {
+        case error.WRONG_USERNAME:
+            return "The username you entered doesn't exist";        
+        case error.REQUEST_ERROR:
+            return "There was an error fetching data";
+    }
+}
+
+function display_error(error) {
+    console.log(error);
+    if (error instanceof Number)
+        document.getElementById("error-message").innerHTML = error_message(error);
+    else 
+        document.getElementById("error-message").innerHTML = "Unhandled error: " + error.toString();
+
+    document.getElementById("error").style.display = "flex";
+}
