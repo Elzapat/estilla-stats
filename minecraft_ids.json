@@ -2384,10 +2384,6 @@
         "type": ["mob"]
     },
     {
-        "id": "minecraft:chicken",
-        "type": ["mob"]
-    },
-    {
         "id": "minecraft:cod",
         "type": ["mob"]
     },
@@ -2488,7 +2484,7 @@
         "type": ["mob"]
     },
     {
-        "id": "minecraftcave_spider:",
+        "id": "minecraft:cave_spider",
         "type": ["mob"]
     },
     {
@@ -2696,7 +2692,7 @@
         "type": ["custom"]
     },
     {
-        "id": "minecraft:damage_dealth",
+        "id": "minecraft:damage_dealt",
         "type": ["custom"]
     },
     {

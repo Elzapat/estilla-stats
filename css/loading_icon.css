@@ -2,8 +2,8 @@
     width: 4%;
     margin: auto;
     opacity: 1;
-    animation: 300ms ease 0ms fade-in, 1s ease 300ms infinite rotate;
-    transition: all 500ms ease;
+    transition: opacity 3s ease;
+    animation: 1s ease 300ms infinite rotate, 300ms ease 0ms fade-in;
 }
 
 @media only screen and (max-width: 1024px) {

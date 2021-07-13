@@ -1,5 +1,6 @@
 // Variable to keep track if wether or not the user has fetched a stat
 var has_fetched_stat = false;
+var stats_load_finished = false;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -18,20 +19,28 @@ async function initiate_loading() {
     if (!has_fetched_stat) {
         var desc_container = document.getElementById("description");
         desc_container.style.transform = "translateX(-100vw)";
+        desc_container.style.position = "absolute";
         remove_desc = true;
     } else {
-
+        var lb_container = document.getElementById("leaderboard-section");
+        lb_container.style.transform = "translateX(-100vw)";
+        lb_container.style.position = "absolute";
     }
 
     let loading_icon = document.createElement("img");
     loading_icon.setAttribute("id", "loading-icon");
     loading_icon.setAttribute("src", "images/estillacraft_logo_transparent_cropped.png");
 
-    await sleep(500);
-    if (remove_desc)
-        desc_container.remove();
+    setTimeout(() => {
+        if (remove_desc)
+            desc_container.remove();
+        else
+            lb_container.remove();
 
-    document.getElementById("main").appendChild(loading_icon);
+        if (stats_loading_finished) return;
+
+        document.getElementById("main").appendChild(loading_icon);
+    }, 500);
 }
 
 async function stop_loading() {
@@ -39,11 +48,7 @@ async function stop_loading() {
     if (!loading_icon)
         return;
 
-    loading_icon.style.opacity = 1;
-    await sleep(200);
-    console.log(loading_icon.style.opacity);
     loading_icon.style.opacity = 0;
-    await sleep(500);
-    console.log(loading_icon.style.opacity);
-    // loading_icon.remove();
+    await sleep(300);
+    loading_icon.remove();
 }

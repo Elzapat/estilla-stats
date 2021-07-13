@@ -21,6 +21,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 main {
@@ -36,7 +37,7 @@ main {
 
 @keyframes slide-in-from-right {
     from { transform: translateX(100vw); }
-    from { transform: translateX(0); }
+    to { transform: translateX(0); }
 }
 
 @keyframes rotate {

@@ -43,7 +43,7 @@ function add_stat_name_suggestions() {
         case "minecraft:used": case "minecraft:crafted":
             type = "item";
             break;
-        case "custom":
+        case "minecraft:custom":
             type = "custom";
             break;
         default:
@@ -63,6 +63,7 @@ function add_stat_name_suggestions() {
 }
 
 async function get_stat() {
+    stats_loading_finished = false;
     await initiate_loading();
 
     has_fetched_stat = true;
@@ -92,26 +93,31 @@ async function get_stat() {
         username = player.name;
     }
 
-    let stat = await fetch_stat(uuid, stat_type, stat_name)
+    let stats = await fetch_stat(uuid, stat_type, stat_name)
         .catch(e => display_error(e));
 
-    if (!stat)
+    if (!stats)
         return;
 
-    console.log(stat);
-    display_stat(stat, !fetch_all)
+    stats.sort((a, b) => b.stat - a.stat);
+
+    display_stat(stats, mc_id_to_human(stat_type, false), mc_id_to_human(stat_name, false), !fetch_all)
 };
 
-function mc_id_to_human(source) {
+function mc_id_to_human(source, capitalize = true) {
     source = source
         .replace(/minecraft:/g, "")
         .replace(/_/g, " ")
 
-    let words = source.split(" ");
-    for (let i = 0; i < words.length; i++)
-        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    if (capitalize) {
+        let words = source.split(" ");
+        for (let i = 0; i < words.length; i++)
+            words[i] = capitalize_first_letter(words[i]);
 
-    return words.join(" ");
+        source = words.join(" ");
+    }
+
+    return source;
 }
 
 function human_to_mc_id(source) {
@@ -123,7 +129,6 @@ async function get_player_info(username) {
     let request = `https://api.mojang.com/users/profiles/minecraft/${username}`;
     return await fetch(request)
         .then(response => {
-            console.log(response);
             if (response.status == 204)
                 throw new Error(error.WRONG_USERNAME);
             else if (!response.ok)
@@ -131,6 +136,18 @@ async function get_player_info(username) {
 
             return response.json();
         });
+}
+
+async function get_username_from_uuid(uuid) {
+    let request = `https://api.mojang.com/user/profiles/${uuid}/names`;
+    return await fetch(request)
+        .then(response => {
+            if (!response.ok)
+                throw new Error(error.REQUEST_ERROR);
+
+            return response.json();
+        })
+        .then(name_history => name_history[name_history.length - 1].name);
 }
 
 async function fetch_stat(uuid, stat_type, stat_name) {
@@ -145,19 +162,100 @@ async function fetch_stat(uuid, stat_type, stat_name) {
         });
 }
 
-function display_stat(stat, only_one_player) {
+async function display_stat(stats, stat_type, stat_name, only_one_player) {
     if (only_one_player) {
 
     } else {
+        leaderboard_title = create_leaderboard_title(stat_type, stat_name);
+
         let leaderboard = document.createElement("section");
-        leaderboard.setAttribute("id", "leaderboard");
+        leaderboard.setAttribute("id", "leaderboard-section");
 
         let table = document.createElement("table");
-        table.setAttribute("id", "leaderboard-table");
+        table.setAttribute("id", "leaderboard");
 
-        stop_loading();
+        let table_header = document.createElement("thead");
+        let table_body = document.createElement("tbody");
+
+        table_header.innerHTML = `
+            <tr>
+                <th colspan="3">${leaderboard_title}</th>
+            </tr>
+        `;
+
+        table_body.innerHTML = `
+            <tr>
+                <td>Rank</td>
+                <td>Player</td>
+                <td>${leaderboard_title}</td>
+            </tr>
+        `;
+
+        let i = 0;
+        for (let stat of stats) {
+            if (!stat.success)
+                continue;
+
+            i++;
+
+            let row = document.createElement("tr");
+            let rank_col = document.createElement("td");
+            let player_col = document.createElement("td");
+            let stat_col = document.createElement("td");
+
+            let player_head_img = document.createElement("img");
+            player_head_img.setAttribute("src", `https://crafatar.com/avatars/${stat.uuid}?size=30`);
+
+            let player_name_p = document.createElement("p");
+            player_name_p.innerHTML = await get_username_from_uuid(stat.uuid)
+                .catch(e => display_error(e)) || stat.uuid;
+
+            player_col.appendChild(player_head_img);
+            player_col.appendChild(player_name_p);
+
+            rank_col.innerHTML = i.toString();
+            stat_col.innerHTML = format_number(stat.stat);
+
+            row.appendChild(rank_col);
+            row.appendChild(player_col);
+            row.appendChild(stat_col);
+
+            table_body.appendChild(row);
+        }
+
+        table.appendChild(table_header);
+        table.appendChild(table_body);
+
+        stats_loading_finished = true;
+        has_fetched_stat = true;
+
+        await stop_loading();
 
         leaderboard.appendChild(table);
         document.getElementById("main").appendChild(leaderboard);
     }
+}
+
+
+function create_leaderboard_title(stat_type, stat_name) {
+    switch (stat_type) {
+        case "killed by":
+            return capitalize_first_letter(stat_type) + ' ' + add_s_if_not_already(stat_name);
+        case "custom":
+            return capitalize_first_letter(stat_name);
+        default:
+            return capitalize_first_letter(add_s_if_not_already(stat_name)) + ' ' + stat_type;
+    }
+}
+
+function capitalize_first_letter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function add_s_if_not_already(word) {
+    return word[word.length - 1] == 's' ? word : word + 's';
+}
+
+function format_number(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
