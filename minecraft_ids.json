@@ -3297,11 +3297,11 @@
     },
     {
         "id": "minecraft:waxed_exposed_cut_copper_slab",
-        "type": ["item", "slab"]
+        "type": ["item", "block"]
     },
     {
         "id": "minecraft:waxed_exposed_cut_copper_stairs",
-        "type": ["item", "slab"]
+        "type": ["item", "block"]
     },
     {
         "id": "minecraft:waxed_oxidized_copper",
@@ -3309,7 +3309,7 @@
     },
     {
         "id": "minecraft:waxed_oxidized_cut_copper",
-        "type": ["item", "slab"]
+        "type": ["item", "block"]
     },
     {
         "id": "minecraft:waxed_oxidized_cut_copper_slab",

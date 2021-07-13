@@ -4,7 +4,6 @@ const error =  {
 };
 
 document.getElementById("error-close").onclick = event => {
-    console.log(event.target.parent);
     event.target.parentNode.style.display = "none";
 }
 
@@ -21,8 +20,12 @@ function display_error(error) {
     console.log(error);
     if (error instanceof Number)
         document.getElementById("error-message").innerHTML = error_message(error);
-    else 
+    else if (error instanceof TypeError)
+        document.getElementById("error-message").innerHTML = "NetworkError: this errors usually occurs when you've entered a non-existant username.";
+    else
         document.getElementById("error-message").innerHTML = "Unhandled error: " + error.toString();
 
     document.getElementById("error").style.display = "flex";
+
+    // stop_loading();
 }

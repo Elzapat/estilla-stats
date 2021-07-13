@@ -63,7 +63,7 @@ function add_stat_name_suggestions() {
 }
 
 async function get_stat() {
-    initiate_loading();
+    await initiate_loading();
 
     has_fetched_stat = true;
 
@@ -85,6 +85,9 @@ async function get_stat() {
         let player = await get_player_info(username)
             .catch(e => display_error(e));
 
+        if (!player)
+            return;
+
         uuid = player.id;
         username = player.name;
     }
@@ -92,7 +95,11 @@ async function get_stat() {
     let stat = await fetch_stat(uuid, stat_type, stat_name)
         .catch(e => display_error(e));
 
+    if (!stat)
+        return;
+
     console.log(stat);
+    display_stat(stat, !fetch_all)
 };
 
 function mc_id_to_human(source) {
@@ -136,4 +143,21 @@ async function fetch_stat(uuid, stat_type, stat_name) {
 
             return response.json();
         });
+}
+
+function display_stat(stat, only_one_player) {
+    if (only_one_player) {
+
+    } else {
+        let leaderboard = document.createElement("section");
+        leaderboard.setAttribute("id", "leaderboard");
+
+        let table = document.createElement("table");
+        table.setAttribute("id", "leaderboard-table");
+
+        stop_loading();
+
+        leaderboard.appendChild(table);
+        document.getElementById("main").appendChild(leaderboard);
+    }
 }

@@ -5,7 +5,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function initiate_loading() {
+async function initiate_loading() {
     // Remove any present loading icons
     {
         let loading_icon = document.getElementById("loading-icon");
@@ -27,16 +27,23 @@ function initiate_loading() {
     loading_icon.setAttribute("id", "loading-icon");
     loading_icon.setAttribute("src", "images/estillacraft_logo_transparent_cropped.png");
 
-    setTimeout(() => {
-        if (remove_desc)
-            desc_container.remove();
+    await sleep(500);
+    if (remove_desc)
+        desc_container.remove();
 
-        document.getElementById("main").appendChild(loading_icon);
-    }, 500);
+    document.getElementById("main").appendChild(loading_icon);
 }
 
 async function stop_loading() {
     let loading_icon = document.getElementById("loading-icon");
+    if (!loading_icon)
+        return;
+
+    loading_icon.style.opacity = 1;
+    await sleep(200);
+    console.log(loading_icon.style.opacity);
     loading_icon.style.opacity = 0;
-    await sleep(300);
+    await sleep(500);
+    console.log(loading_icon.style.opacity);
+    // loading_icon.remove();
 }

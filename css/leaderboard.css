@@ -1,0 +1,11 @@
+#leaderboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    margin-top: 2rem;
+    width: 85%;
+    background-color: var(--background-color);
+    border-radius: 2px;
+    animation: 500ms ease slide-in-from-right;
+}

@@ -16,6 +16,8 @@
     animation: 200ms ease 300ms forwards fade-in;
     color: black;
     position: absolute;
+    font-size: 90%;
+    text-align: center;
 }
 
 #error-close {
@@ -34,6 +36,25 @@
 
 
 @keyframes error-appear {
-    from { height: 0 }
+    from { height: 0; }
     to { height: 2rem; }
+}
+
+@media only screen and (max-width: 1024px) {
+    #error-message {
+        font-size: 80%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #error-message {
+        font-size: 60%;
+        position: static;
+    }
+
+    #error-close {
+        position: static;
+        margin-right: 1ch;
+        margin-left: 1ch;
+    }
 }
