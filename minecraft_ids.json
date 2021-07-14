@@ -32,7 +32,19 @@
         "type": ["block", "item"]
     },
     {
-        "id": "minecraft:planks",
+        "id": "minecraft:oak_planks",
+        "type": ["block", "item"]
+    },
+    {
+        "id": "minecraft:spruce_planks",
+        "type": ["block", "item"]
+    },
+    {
+        "id": "minecraft:jungle_planks",
+        "type": ["block", "item"]
+    },
+    {
+        "id": "minecraft:dark_oak_planks",
         "type": ["block", "item"]
     },
     {
@@ -816,6 +828,10 @@
         "type": ["block", "item"]
     },
     {
+        "id": "minecraft:obsidian",
+        "type": ["block", "item"]
+    },
+    {
         "id": "minecraft:chiseled_red_sandstone",
         "type": ["block", "item"]
     },
@@ -1213,6 +1229,10 @@
     },
     {
         "id": "minecraft:water_bucket",
+        "type": ["item"]
+    },
+    {
+        "id": "minecraft:lava_bucket",
         "type": ["item"]
     },
     {
@@ -1972,88 +1992,100 @@
         "type": ["item", "block"]
     },
     {
+        "id": "minecraft:andesite",
+        "type": ["item","block"]
+    },
+    {
+        "id": "minecraft:diorite",
+        "type": ["item","block"]
+    },
+    {
+        "id": "minecraft:granite",
+        "type": ["item","block"]
+    },
+    {
         "id": "minecraft:andesite_wall",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:sandstone_wall",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:diorite_wall",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:smooth_red_sandstone_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:polished_diorite_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:end_stone_brick_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:smooth_sandstone_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:granite_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:red_nether_brick_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:diorite_stairs",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:smooth_red_sandstone_slab",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:polished_diorite_slab",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:end_stone_brick_slab",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:smooth_quartz_slab",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:andesite_slab",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:polished_andesite_slab",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:scaffolding",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:composter",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:spruce_sign",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:jungle_sign",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:dark_oak_sign",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:red_dye",
@@ -2105,31 +2137,31 @@
     },
     {
         "id": "minecraft:barrel",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:blast_furnace",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:fletching_table",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:lectern",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:stonecutter",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:lantern",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:campfire",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:honeycomb",
@@ -2137,23 +2169,23 @@
     },
     {
         "id": "minecraft:beehive",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:honey_block",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:oak_wall_sign",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:birch_wall_sign",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:jungle_wall_sign",
-        "type": ["block"]
+        "type": ["block", "item"]
     },
     {
         "id": "minecraft:potted_cornflower",
@@ -2173,6 +2205,10 @@
     },
     {
         "id": "minecraft:crimson_planks",
+        "type": ["block", "item"]
+    },
+    {
+        "id": "minecraft:warped_planks",
         "type": ["block", "item"]
     },
     {

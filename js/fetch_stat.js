@@ -8,7 +8,9 @@ fetch("minecraft_ids.json")
     });
 
 document.getElementById("stat-info-form").onsubmit = () => {
-    get_stat();
+    if (stats_load_finished)
+        get_stat();
+
     return false;
 };
 
@@ -89,8 +91,8 @@ async function get_stat() {
         if (!player)
             return;
 
-        uuid = player.id;
-        username = player.name;
+        uuid = player.uuid;
+        username = player.username;
     }
 
     let stats = await fetch_stat(uuid, stat_type, stat_name)
@@ -99,7 +101,10 @@ async function get_stat() {
     if (!stats)
         return;
 
-    stats.sort((a, b) => b.stat - a.stat);
+    if (fetch_all) {
+        stats = stats.filter(stat => stat.success);
+        stats.sort((a, b) => b.stat - a.stat);
+    }
 
     display_stat(stats, mc_id_to_human(stat_type, false), mc_id_to_human(stat_name, false), !fetch_all)
 };
@@ -120,34 +125,34 @@ function mc_id_to_human(source, capitalize = true) {
     return source;
 }
 
-function human_to_mc_id(source) {
 
-}
-
-
-async function get_player_info(username) {
-    let request = `https://api.mojang.com/users/profiles/minecraft/${username}`;
+async function get_player_info(player) {
+    let request = `https://api.ashcon.app/mojang/v2/user/${player}`;
     return await fetch(request)
         .then(response => {
-            if (response.status == 204)
-                throw new Error(error.WRONG_USERNAME);
-            else if (!response.ok)
-                throw new Error(error.REQUEST_ERROR);
+            if (!response.ok)
+                throw error.REQUEST_ERROR;
 
             return response.json();
         });
 }
 
-async function get_username_from_uuid(uuid) {
-    let request = `https://api.mojang.com/user/profiles/${uuid}/names`;
-    return await fetch(request)
-        .then(response => {
-            if (!response.ok)
-                throw new Error(error.REQUEST_ERROR);
+async function get_names_from_uuids(uuids) {
+    let promises = new Array();
+    for (let uuid of uuids) {
+        let request = `https://api.ashcon.app/mojang/v2/user/${uuid}`;
+        promises.push(fetch(request)
+            .then(response => {
+                if (!response.ok)
+                    throw error.REQUEST_ERROR;
 
-            return response.json();
-        })
-        .then(name_history => name_history[name_history.length - 1].name);
+                return response.json();
+            })
+            .then(player_info => player_info.username)
+        );
+    }
+
+    return Promise.allSettled(promises);
 }
 
 async function fetch_stat(uuid, stat_type, stat_name) {
@@ -156,20 +161,52 @@ async function fetch_stat(uuid, stat_type, stat_name) {
     return fetch(request)
         .then(response => {
             if (!response.ok)
-                throw new Error(error.REQUEST_ERROR);
+                throw error.REQUEST_ERROR;
 
             return response.json();
         });
 }
 
 async function display_stat(stats, stat_type, stat_name, only_one_player) {
-    if (only_one_player) {
+    for (let container of document.getElementsByClassName("stats-container"))
+        container.remove();
 
+    if (only_one_player) {
+        let stat = stats[0];
+
+        let container = document.createElement("section");
+        container.setAttribute("id", "stats-container");
+        container.setAttribute("class", "stats-containers");
+
+        let single_stat = document.createElement("div");
+        single_stat.setAttribute("id", "single-stat-container");
+
+        let player_info = await get_player_info(stat.uuid)
+            .catch(e => display_error(e));
+        let player_name = player_info == undefined ? stat.uuid : player_info.username;
+
+        let player_name_span = document.createElement("span");
+        let player_head_img = document.createElement("img");
+        let stat_span = document.createElement("span");
+
+        player_name_span.innerHTML = player_name;
+        player_head_img.setAttribute("src", `https://crafatar.com/renders/body/${stat.uuid}`);
+        stat_span.innerHTML = create_single_stat_phrase(player_name, stat_type, stat_name, stat.stat);
+
+        single_stat.appendChild(player_name_span);
+        single_stat.appendChild(player_head_img);
+        single_stat.appendChild(stat_span);
+
+        await stop_loading();
+
+        container.appendChild(single_stat);
+        document.getElementById("main").appendChild(container);
     } else {
         leaderboard_title = create_leaderboard_title(stat_type, stat_name);
 
         let leaderboard = document.createElement("section");
-        leaderboard.setAttribute("id", "leaderboard-section");
+        leaderboard.setAttribute("id", "stats-container");
+        leaderboard.setAttribute("class", "stats-containers");
 
         let table = document.createElement("table");
         table.setAttribute("id", "leaderboard");
@@ -191,12 +228,14 @@ async function display_stat(stats, stat_type, stat_name, only_one_player) {
             </tr>
         `;
 
+        let uuids = stats.map(stat => stat.uuid);
+        let names = await get_names_from_uuids(uuids)
+            .catch(e => display_error(e));
+
         let i = 0;
         for (let stat of stats) {
             if (!stat.success)
                 continue;
-
-            i++;
 
             let row = document.createElement("tr");
             let rank_col = document.createElement("td");
@@ -207,12 +246,12 @@ async function display_stat(stats, stat_type, stat_name, only_one_player) {
             player_head_img.setAttribute("src", `https://crafatar.com/avatars/${stat.uuid}?size=30`);
 
             let player_name_p = document.createElement("p");
-            player_name_p.innerHTML = await get_username_from_uuid(stat.uuid)
-                .catch(e => display_error(e)) || stat.uuid;
+            player_name_p.innerHTML = names[i].value ?? stat.uuid;
 
             player_col.appendChild(player_head_img);
             player_col.appendChild(player_name_p);
 
+            i++;
             rank_col.innerHTML = i.toString();
             stat_col.innerHTML = format_number(stat.stat);
 
@@ -226,14 +265,14 @@ async function display_stat(stats, stat_type, stat_name, only_one_player) {
         table.appendChild(table_header);
         table.appendChild(table_body);
 
-        stats_loading_finished = true;
-        has_fetched_stat = true;
-
         await stop_loading();
 
         leaderboard.appendChild(table);
         document.getElementById("main").appendChild(leaderboard);
     }
+
+    stats_loading_finished = true;
+    has_fetched_stat = true;
 }
 
 
@@ -245,6 +284,33 @@ function create_leaderboard_title(stat_type, stat_name) {
             return capitalize_first_letter(stat_name);
         default:
             return capitalize_first_letter(add_s_if_not_already(stat_name)) + ' ' + stat_type;
+    }
+}
+
+function create_single_stat_phrase(username, stat_type, stat_name, stat) {
+    if (stat_type != "custom" && stat > 1) {
+        if (stat_name.endsWith("man"))
+            stat_name = stat_name.substr(0, stat_name.length - 3) + "men";
+        else if (stat_type == "killed")
+            stat_name = add_s_if_not_already(stat_name);
+    } else if (stat_type == "custom") {
+        stat_name = mc_id_to_human(stat_name);
+     }
+
+    switch (stat_type) {
+        case "killed by": case "used":
+            let number_expr = new String();
+            switch (stat) {
+                case 0: number_expr = ""; break;
+                case 1: number_expr = "once"; break;
+                case 2: number_expr = "twice"; break;
+                default: number_expr = `${format_number(stat)} times`;
+            }
+            return `${username} has ${stat == 0 ? "never" : ""} ${stat_type == "killed by" ? "been killed by" : "used"} ${stat_name} ${number_expr}`;
+        case "custom":
+            return `${stat_name}: ${format_number(stat)}`;
+        default: 
+            return `${username} has ${stat_type} ${format_number(stat)} ${stat_name}`;
     }
 }
 

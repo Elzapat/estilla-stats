@@ -17,8 +17,7 @@ function error_message(error_type) {
 }
 
 function display_error(error) {
-    console.log(error);
-    if (error instanceof Number)
+    if (typeof error == "number")
         document.getElementById("error-message").innerHTML = error_message(error);
     else if (error instanceof TypeError)
         document.getElementById("error-message").innerHTML = "NetworkError: this errors usually occurs when you've entered a non-existant username.";

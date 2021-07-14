@@ -1,19 +1,12 @@
 // Variable to keep track if wether or not the user has fetched a stat
 var has_fetched_stat = false;
-var stats_load_finished = false;
+var stats_load_finished = true;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function initiate_loading() {
-    // Remove any present loading icons
-    {
-        let loading_icon = document.getElementById("loading-icon");
-        if (loading_icon)
-            loading_icon.remove();
-    }
-
     let remove_desc = false;
 
     if (!has_fetched_stat) {
@@ -22,23 +15,31 @@ async function initiate_loading() {
         desc_container.style.position = "absolute";
         remove_desc = true;
     } else {
-        var lb_container = document.getElementById("leaderboard-section");
-        lb_container.style.transform = "translateX(-100vw)";
-        lb_container.style.position = "absolute";
+        var stats_container = document.getElementById("stats-container");
+        if (stats_container) {
+            stats_container.style.transform = "translateX(-100vw)";
+            stats_container.style.position = "absolute";
+        }
     }
 
     let loading_icon = document.createElement("img");
     loading_icon.setAttribute("id", "loading-icon");
+    loading_icon.setAttribute("class", "loading-icons");
     loading_icon.setAttribute("src", "images/estillacraft_logo_transparent_cropped.png");
 
     setTimeout(() => {
         if (remove_desc)
             desc_container.remove();
-        else
-            lb_container.remove();
+        else {
+            for (let container of document.getElementsByClassName("stats-containers"))
+                container.remove();
+        }
 
         if (stats_loading_finished) return;
 
+        // Remove any present loading icons
+        for (let icon of document.getElementsByClassName("loading-icons"))
+            icon.remove();
         document.getElementById("main").appendChild(loading_icon);
     }, 500);
 }
