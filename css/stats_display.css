@@ -1,0 +1,156 @@
+#stats-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    margin-top: 2rem;
+    width: 85%;
+    background-color: var(--background-color);
+    border-radius: 2px;
+    opacity: 1;
+    background-color: var(--background-color);
+    color: var(--accent-green);
+    animation: 500ms ease slide-in-from-right;
+    transition: transform 500ms ease;
+    position: static;
+}
+
+/* --------------------------------------------- */
+/* LEADERBOARD DISPLAY                           */
+/* --------------------------------------------- */
+
+#leaderboard {
+    flex: 1;
+    border-collapse: collapse;
+    margin: 3rem 15% 3rem 15%;
+    width: auto;
+    border-radius: 2px;
+    text-align: center;
+}
+
+
+#leaderboard > thead {
+    background-color: var(--accent-green);
+    color: var(--background-color);
+}
+
+thead th {
+    text-align: center;
+    margin: auto;
+}
+
+#leaderboard tr {
+    display: flex;
+    /* margin: -2ch; */
+    /* border: 2px solid var(--accent-green); */
+    border-bottom: 1px solid var(--accent-green);
+    border-right: 1px solid var(--accent-green);
+    border-left: 1px solid var(--accent-green);
+}
+
+#leaderboard td:not(#leaderboard tr:first-child > td) {
+    margin-top: 1ch;
+    margin-bottom: 1ch;
+}
+
+#leaderboard td:nth-child(1) {
+    width: 25%;
+}
+
+#leaderboard td:nth-child(2) {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#leaderboard td:nth-child(3) {
+    width: 25%;
+}
+
+#leaderboard td:nth-child(2) > img {
+    width: 30px;
+    height: 30px;
+}
+
+#leaderboard td:nth-child(2) > p {
+    margin: 0;
+    width: 50%;
+}
+
+#leaderboard > tbody > tr:first-child {
+    border-top: 2px solid var(--background-color);
+    color: var(--background-color);
+    background-color: var(--accent-green);
+}
+
+/* --------------------------------------------- */
+/* SINGLE STAT DISPLAY                           */
+/* --------------------------------------------- */
+
+#single-stat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    font-family: "Minecraftia";
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#single-stat-container > span:first-child {
+    padding: 1px 6px 1px 6px;
+    margin-bottom: 1ch;
+    background-color: rgba(27, 27, 27, 0.5);
+}
+
+#single-stat-container > img {
+    margin-bottom: 1ch;
+}
+
+#single-stat-container > span:last-child {
+    text-align: center;
+}
+
+/* --------------------------------------------- */
+/* RESPONSIVE DESIGN IS COOL                     */
+/* --------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+    #leaderboard {
+        margin-left: 7.5%;
+        margin-right: 7.5%;
+    }
+
+    #leaderboard td:nth-child(1) {
+        width: 15%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #stats-container {
+        margin-top: 0;
+        width: 100%;
+    }
+
+    #leaderboard {
+        width: 100%;
+        margin: 0;
+    }
+
+    #leaderboard td:nth-child(1) {
+        width: 15%;
+    }
+
+    #leaderboard td:nth-child(3) {
+        width: 30%;
+    }
+
+    #leaderboard td:nth-child(2) > p {
+        flex: 1;
+    }
+
+    #leaderboard td:nth-child(2) > img {
+        display: none;
+    }
+}
