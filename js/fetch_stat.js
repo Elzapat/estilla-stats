@@ -57,8 +57,7 @@ function add_stat_name_suggestions() {
     for (let thing of minecraft_ids) {
         if (thing.type.includes(type)) {
             let option = document.createElement("option");
-            option.text = mc_id_to_human(thing.id);
-            option.value = thing.id;
+            option.value = mc_id_to_human(thing.id);
             datalist.appendChild(option);
         }
     }
@@ -79,7 +78,8 @@ async function get_stat() {
     }
 
     stat_type = stat_type_input.value;
-    stat_name = stat_name_input.value;
+    stat_name = human_to_mc_id(stat_name_input.value);
+    console.log(stat_name);
 
     if (!fetch_all) {
         let player = await get_player_info(username)
@@ -128,6 +128,11 @@ function mc_id_to_human(source, capitalize = true) {
     return source;
 }
 
+function human_to_mc_id(source) {
+    return "minecraft:" + source
+        .toLowerCase()
+        .replace(/ /g, "_");
+}
 
 async function get_player_info(player) {
     let request = `https://api.ashcon.app/mojang/v2/user/${player}`;
