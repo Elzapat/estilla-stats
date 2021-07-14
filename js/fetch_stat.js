@@ -66,9 +66,6 @@ function add_stat_name_suggestions() {
 
 async function get_stat() {
     stats_loading_finished = false;
-    await initiate_loading();
-
-    has_fetched_stat = true;
 
     let username_input = document.getElementById("username");
     let stat_type_input = document.getElementById("stat-type");
@@ -95,6 +92,10 @@ async function get_stat() {
         username = player.username;
     }
 
+    await initiate_loading();
+
+    has_fetched_stat = true;
+
     let stats = await fetch_stat(uuid, stat_type, stat_name)
         .catch(e => display_error(e));
 
@@ -106,7 +107,9 @@ async function get_stat() {
         stats.sort((a, b) => b.stat - a.stat);
     }
 
-    display_stat(stats, mc_id_to_human(stat_type, false), mc_id_to_human(stat_name, false), !fetch_all)
+    await display_stat(stats, mc_id_to_human(stat_type, false), mc_id_to_human(stat_name, false), !fetch_all)
+
+    stats_loading_finished = true;
 };
 
 function mc_id_to_human(source, capitalize = true) {
@@ -130,7 +133,9 @@ async function get_player_info(player) {
     let request = `https://api.ashcon.app/mojang/v2/user/${player}`;
     return await fetch(request)
         .then(response => {
-            if (!response.ok)
+            if (response.status == 404)
+                throw error.USERNAME_ERROR;
+            else if (!response.ok)
                 throw error.REQUEST_ERROR;
 
             return response.json();
@@ -190,7 +195,7 @@ async function display_stat(stats, stat_type, stat_name, only_one_player) {
         let stat_span = document.createElement("span");
 
         player_name_span.innerHTML = player_name;
-        player_head_img.setAttribute("src", `https://crafatar.com/renders/body/${stat.uuid}`);
+        player_head_img.setAttribute("src", `https://crafatar.com/renders/body/${stat.uuid}?overlay`);
         stat_span.innerHTML = create_single_stat_phrase(player_name, stat_type, stat_name, stat.stat);
 
         single_stat.appendChild(player_name_span);
@@ -270,9 +275,6 @@ async function display_stat(stats, stat_type, stat_name, only_one_player) {
         leaderboard.appendChild(table);
         document.getElementById("main").appendChild(leaderboard);
     }
-
-    stats_loading_finished = true;
-    has_fetched_stat = true;
 }
 
 

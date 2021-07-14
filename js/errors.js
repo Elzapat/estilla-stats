@@ -1,6 +1,7 @@
 const error =  {
     WRONG_USERNAME: 1,
-    REQUEST_ERROR: 2
+    REQUEST_ERROR: 2,
+    USERNAME_ERROR: 3
 };
 
 document.getElementById("error-close").onclick = event => {
@@ -13,6 +14,8 @@ function error_message(error_type) {
             return "The username you entered doesn't exist";        
         case error.REQUEST_ERROR:
             return "There was an error fetching data";
+        case error.USERNAME_ERROR:
+            return "This username doesn't exist";
     }
 }
 
