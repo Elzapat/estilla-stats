@@ -1,87 +1,69 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>EstillaStats</title>
-        <meta name="author" content="EstillaStats">
-        <meta name="description" content="Lookup the stats of the players of the EstillaCraft Minecraft server">
+        <title>Estillacraft</title>
+        <meta name="author" content="Elzapat">
+        <meta name="description" content="Website for the Estillacraft Minecraft server">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- CSS -->
-        <link href="css/constants.css" rel="stylesheet">
-        <link href="css/header.css" rel="stylesheet">
-        <link href="css/description.css" rel="stylesheet">
-        <link href="css/loading_icon.css" rel="stylesheet">
-        <link href="css/error.css" rel="stylesheet">
-        <link href="css/stats_display.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Favicon -->
+        <link href="images/estillacraft_logo_transparent_cropped_square.png" rel="icon">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
         <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
-        <!-- Favicon -->
-        <link href="images/estillacraft_logo_transparent_cropped_square.png" rel="icon">
-
         <!-- JS -->
-        <script src="js/loading.js" defer></script>
-        <script src="js/errors.js" defer></script>
-        <script src="js/fetch_stat.js" defer></script>
+        <script src="js/preview_selection.js" defer></script>
     </head>
-
     <body>
-        <header>
-            <form id="stat-info-form">
-                <div id="logo">
-                    <img src="images/estillacraft_logo_transparent_cropped.png"/>
-                    <!-- <span id="title"><strong>EstillaStats</strong></span> -->
-                </div>
-                <div class="input-container">
-                    <input id="username" value="" type="text" placeholder="Username"/>
-                </div>
-                <div class="input-container">
-                    <select id="stat-type" required>
-                        <option value="" disabled selected>Choose a stat type</option>
-                        <option value="minecraft:killed">Killed</option>
-                        <option value="minecraft:mined">Mined</option>
-                        <option value="minecraft:broken">Broken</option>
-                        <option value="minecraft:dropped">Dropped</option>
-                        <option value="minecraft:picked_up">Picked up</option>
-                        <option value="minecraft:crafted">Crafted</option>
-                        <option value="minecraft:used">Used</option>
-                        <option value="minecraft:killed_by">Killed by</option>
-                        <option value="minecraft:custom">Custom</option>
-                    </select>
-                </div>
-                <div class="input-container">
-                    <input list="stat-names" id="stat-name" type="text" placeholder="Stat name" autocomplete="off" required />
-                    <datalist id="stat-names">
-                    </datalist>
-                </div>
-                <div class="button-container">
-                    <button type="submit" id="get-stat">get stat</button>
-                </div>
-            </form>
-        </header>
-        <main id="main">
-            <section id="error">
-                <p id="error-message">ERROR</p>
-                <img id="error-close" src="images/close.svg"/>
-            </section>
-            <section id="description">
-                <img src="images/estillacraft_logo_transparent_cropped.png"/>
+        <h1 id="main-title">
+            <span class="title-letter">E</span>
+            <span class="title-letter">S</span>
+            <span class="title-letter">T</span>
+            <span class="title-letter">I</span>
+            <span class="title-letter">L</span>
+            <span class="title-letter">L</span>
+            <span class="title-letter">A</span>
+            <span class="title-letter">C</span>
+            <span class="title-letter">R</span>
+            <span class="title-letter">A</span>
+            <span class="title-letter">F</span>
+            <span class="title-letter">T</span>
+        </h1>
+        <main>
+            <div id="buttons">
+                <button id="dynmap-button">Dynmap</button>
+                <button id="stats-button">Estillastats</button>
+                <button id="world-dl-button">World Downloads</button>
+            </div>
+            <div id="placeholder-preview" class="preview">
+            </div>
+            <div id="dynmap-preview" class="preview">
                 <div id="content">
-                    <h1>Estilla Stats</h1>
+                    <h2>Dynmap</h2>
                     <p>
-                        Welcome to Estillastats, a website where you can view the stats of the
-                        players of the Estillacraft Minecraft server.
+                        A live view of the Estillacraft world map!<br>
+                        You can see and interact with the players online.
                     </p>
-                    <p>
-                        Simply choose a stat type from the list, and enter a stat name, you'll be given
-                        options based on the stat type you chose. Optionally, you can enter a username
-                        to view the chosen stat for only one player.
-                    </p>
+                    <button><a href="https://estillacraft.net/dynmap/">Take me there!</a></button>
                 </div>
-            </section>
+                <iframe src="https://estillacraft.net/dynmap" description = "Estillacraft dynmap"></iframe>
+            </div>
+            <div id="stats-preview" class="preview">
+                <h2>Estillastats</h2>
+                <p>
+                    Estillastats is a website where you can see the stats of all the players of the server. Either search for one stat for one player or check the leaderboard for one stat!
+                </p>
+                <button><a href="https://estillacraft.net/stats">Take me there!</a></button>
+            </div>
+            <div id="world-dl-preview" class="preview">
+            </div>
         </main>
+        <footer>
+        </footer>
     </body>
 </html>
