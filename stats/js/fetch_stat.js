@@ -79,7 +79,6 @@ async function get_stat() {
 
     stat_type = stat_type_input.value;
     stat_name = human_to_mc_id(stat_name_input.value);
-    console.log(stat_name);
 
     if (!fetch_all) {
         let player = await get_player_info(username)
@@ -263,7 +262,9 @@ async function display_stat(stats, stat_type, stat_name, only_one_player) {
 
             i++;
             rank_col.innerHTML = i.toString();
-            stat_col.innerHTML = format_number(stat.stat);
+            stat_col.innerHTML = stat_name == "play time" ?
+                minecraft_ticks_to_formatted_time(stat.stat):
+                format_number(stat.stat);
 
             row.appendChild(rank_col);
             row.appendChild(player_col);
@@ -315,7 +316,8 @@ function create_single_stat_phrase(username, stat_type, stat_name, stat) {
             }
             return `${username} has ${stat == 0 ? "never" : ""} ${stat_type == "killed by" ? "been killed by" : "used"} ${stat_name} ${number_expr}`;
         case "custom":
-            return `${stat_name}: ${format_number(stat)}`;
+            return `${stat_name}: ${stat_name.toLowerCase() == "play time" ?
+                    minecraft_ticks_to_formatted_time(stat) : format_number(stat)}`;
         default: 
             return `${username} has ${stat_type} ${format_number(stat)} ${stat_name}`;
     }
@@ -331,4 +333,22 @@ function add_s_if_not_already(word) {
 
 function format_number(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function minecraft_ticks_to_formatted_time(ticks) {
+    let seconds = Math.floor(ticks / 20);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+    let days = Math.floor(hours / 24);
+
+    seconds = seconds % 60;
+    minutes = minutes % 60;
+    hours = hours % 24;
+
+    let days_s =  days > 0 ? `${days}d ` : ""; 
+    let hours_s = days > 0 || hours > 0 ? `${hours}h ` : "";
+    let minutes_s = days > 0 || hours > 0 || minutes > 0 ? `${minutes}m ` : "";
+    let seconds_s = `${seconds}s`;
+
+    return days_s + hours_s + minutes_s + seconds_s;
 }

@@ -38,6 +38,7 @@ form > div:last-child {
     background-color: var(--accent-green);
     color: var(--accent-color);
     transition: all var(--transition-time) ease;
+    padding: 0 1.5ch 0 1.5ch;
 }
 
 #get-stat:hover {
